@@ -5,6 +5,7 @@ import com.marcosparreiras.programmingcourses.exceptions.dtos.ErrorMessageDTO;
 import com.marcosparreiras.programmingcourses.modules.course.dtos.CreateCourseRequestDTO;
 import com.marcosparreiras.programmingcourses.modules.course.dtos.CreateCourseResponseDTO;
 import com.marcosparreiras.programmingcourses.modules.course.useCases.CreateCourseUseCase;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class CourseController {
 
   @PostMapping("")
   public ResponseEntity<Object> create(
-    @RequestBody CreateCourseRequestDTO createCourseRequestDTO
+    @Valid @RequestBody CreateCourseRequestDTO createCourseRequestDTO
   ) {
     try {
       var course = this.createCourseUseCase.execute(createCourseRequestDTO);

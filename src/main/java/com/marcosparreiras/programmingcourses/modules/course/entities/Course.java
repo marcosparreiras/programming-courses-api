@@ -13,7 +13,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.validator.constraints.Length;
 
 @Data
 @Entity(name = "courses")
@@ -26,13 +25,13 @@ public class Course {
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
 
-  @Length(min = 3, message = "Name is a required field")
-  @Column(name = "name")
+  @Column(name = "name", nullable = false)
   private String name;
 
-  @Length(min = 3, message = "Category is a required field")
+  @Column(name = "category", nullable = false)
   private String category;
 
+  @Column(name = "isActive", nullable = false)
   private boolean isActive;
 
   @CreationTimestamp

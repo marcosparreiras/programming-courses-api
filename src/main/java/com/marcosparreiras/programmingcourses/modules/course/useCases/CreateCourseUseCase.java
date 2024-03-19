@@ -16,7 +16,7 @@ public class CreateCourseUseCase {
   public Course execute(CreateCourseRequestDTO createCourseRequestDTO)
     throws CourseAlreadyExistsError {
     var courseAlreadyExists =
-      this.courseRepository.findByName(createCourseRequestDTO.name());
+      this.courseRepository.findByName(createCourseRequestDTO.getName());
 
     if (courseAlreadyExists != null) {
       throw new CourseAlreadyExistsError();
@@ -24,8 +24,8 @@ public class CreateCourseUseCase {
 
     var newCourse = Course
       .builder()
-      .name(createCourseRequestDTO.name())
-      .category(createCourseRequestDTO.category())
+      .name(createCourseRequestDTO.getName())
+      .category(createCourseRequestDTO.getCategory())
       .isActive(false)
       .build();
 
