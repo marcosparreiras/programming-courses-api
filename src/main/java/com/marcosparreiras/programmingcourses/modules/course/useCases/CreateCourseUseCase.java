@@ -5,7 +5,9 @@ import com.marcosparreiras.programmingcourses.modules.course.entities.Course;
 import com.marcosparreiras.programmingcourses.modules.course.repositoires.CourseRepository;
 import com.marcosparreiras.programmingcourses.modules.exceptions.CourseAlreadyExistsError;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CreateCourseUseCase {
 
   @Autowired
