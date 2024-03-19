@@ -1,4 +1,4 @@
-package com.marcosparreiras.programmingcourses.modules.exceptions;
+package com.marcosparreiras.programmingcourses.exceptions;
 
 public class CourseAlreadyExistsError extends Exception {
 

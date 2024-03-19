@@ -1,10 +1,10 @@
 package com.marcosparreiras.programmingcourses.modules.course.controllers;
 
+import com.marcosparreiras.programmingcourses.exceptions.CourseAlreadyExistsError;
+import com.marcosparreiras.programmingcourses.exceptions.dtos.ErrorMessageDTO;
 import com.marcosparreiras.programmingcourses.modules.course.dtos.CreateCourseRequestDTO;
 import com.marcosparreiras.programmingcourses.modules.course.dtos.CreateCourseResponseDTO;
-import com.marcosparreiras.programmingcourses.modules.course.dtos.ErrorReponseDTO;
 import com.marcosparreiras.programmingcourses.modules.course.useCases.CreateCourseUseCase;
-import com.marcosparreiras.programmingcourses.modules.exceptions.CourseAlreadyExistsError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +32,7 @@ public class CourseController {
     } catch (CourseAlreadyExistsError error) {
       return ResponseEntity
         .badRequest()
-        .body(new ErrorReponseDTO(error.getMessage()));
+        .body(new ErrorMessageDTO(error.getMessage(), "name"));
     }
   }
 }

@@ -1,9 +1,9 @@
 package com.marcosparreiras.programmingcourses.modules.course.useCases;
 
+import com.marcosparreiras.programmingcourses.exceptions.CourseAlreadyExistsError;
 import com.marcosparreiras.programmingcourses.modules.course.dtos.CreateCourseRequestDTO;
 import com.marcosparreiras.programmingcourses.modules.course.entities.Course;
 import com.marcosparreiras.programmingcourses.modules.course.repositoires.CourseRepository;
-import com.marcosparreiras.programmingcourses.modules.exceptions.CourseAlreadyExistsError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
