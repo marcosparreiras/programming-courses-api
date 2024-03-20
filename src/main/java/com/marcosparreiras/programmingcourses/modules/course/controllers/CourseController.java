@@ -7,9 +7,11 @@ import com.marcosparreiras.programmingcourses.modules.course.dtos.CreateCourseRe
 import com.marcosparreiras.programmingcourses.modules.course.dtos.CreateCourseResponseDTO;
 import com.marcosparreiras.programmingcourses.modules.course.dtos.FetchCoursesRequestDTO;
 import com.marcosparreiras.programmingcourses.modules.course.dtos.FetchCoursesResponseDTO;
+import com.marcosparreiras.programmingcourses.modules.course.dtos.GetCourseRequestDTO;
 import com.marcosparreiras.programmingcourses.modules.course.dtos.UpdateCourseRequestDTO;
 import com.marcosparreiras.programmingcourses.modules.course.useCases.CreateCourseUseCase;
 import com.marcosparreiras.programmingcourses.modules.course.useCases.FetchCoursesUseCase;
+import com.marcosparreiras.programmingcourses.modules.course.useCases.GetCourseUseCase;
 import com.marcosparreiras.programmingcourses.modules.course.useCases.UpdateCourseUseCase;
 import jakarta.validation.Valid;
 import java.util.Map;
@@ -34,6 +36,9 @@ public class CourseController {
 
   @Autowired
   private FetchCoursesUseCase fetchCoursesUseCase;
+
+  @Autowired
+  private GetCourseUseCase getCourseUseCase;
 
   @Autowired
   private UpdateCourseUseCase updateCourseUseCase;
@@ -62,6 +67,22 @@ public class CourseController {
     );
     var courses = this.fetchCoursesUseCase.execute(fetchCoursesRequestDTO);
     return ResponseEntity.ok().body(new FetchCoursesResponseDTO(courses));
+  }
+
+  @GetMapping("/{courseId}")
+  public ResponseEntity<Object> show(@PathVariable String courseId) {
+    try {
+      var getCourseRequestDTO = GetCourseRequestDTO
+        .builder()
+        .id(courseId)
+        .build();
+      var course = this.getCourseUseCase.execute(getCourseRequestDTO);
+      return ResponseEntity.ok().body(course);
+    } catch (CourseNotFoundError error) {
+      return ResponseEntity
+        .badRequest()
+        .body(new ErrorMessageDTO(error.getMessage(), null));
+    }
   }
 
   @PutMapping("/{courseId}")
