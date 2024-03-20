@@ -13,8 +13,8 @@ Nesse desafio será desenvolvido uma API fictícia para uma empresa de cursos de
 
 ### Requisitos Funcionais
 
-- [] Deve ser possível criar um curso no banco de dados, enviando os campos `name` e `category` por meio do `body` da requisição.
-  Ao criar um curso, os campos: `id`, `created_at`e`updated_at` devem ser preenchidos automaticamente, conforme a orientação das propriedades acima.
+- [x] Deve ser possível criar um curso no banco de dados, enviando os campos `name` e `category` por meio do `body` da requisição.
+      Ao criar um curso, os campos: `id`, `created_at`e`updated_at` devem ser preenchidos automaticamente, conforme a orientação das propriedades acima.
 
 - [] Deve ser possível listar todas os cursos salvos no banco de dados.
   Também deve ser possível realizar uma busca, filtrando os cursos pelo `name` e `category`.
