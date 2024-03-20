@@ -101,7 +101,7 @@ public class CourseController {
       this.updateCourseUseCase.execute(updateCourseRequestDTO);
 
       return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
-    } catch (CourseNotFoundError error) {
+    } catch (Exception error) {
       return ResponseEntity
         .badRequest()
         .body(new ErrorMessageDTO(error.getMessage(), null));

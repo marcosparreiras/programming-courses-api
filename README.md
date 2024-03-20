@@ -19,9 +19,9 @@ Nesse desafio será desenvolvido uma API fictícia para uma empresa de cursos de
 - [x] Deve ser possível listar todas os cursos salvos no banco de dados.
       Também deve ser possível realizar uma busca, filtrando os cursos pelo `name` e `category`.
 
-- [] Deve ser possível atualizar um curso pelo `id`.
-  No `body` da requisição, deve receber somente o `name` e/ou `category` para serem atualizados.
-  Se for enviado somente o `name`, significa que o `category` não pode ser atualizado e vice-versa. Além disso `active` for informado nessa rota, ele deverá ser ignorado, pois a rota que deverá fazer essa atualização, é a de patch.
+- [x] Deve ser possível atualizar um curso pelo `id`.
+      No `body` da requisição, deve receber somente o `name` e/ou `category` para serem atualizados.
+      Se for enviado somente o `name`, significa que o `category` não pode ser atualizado e vice-versa. Além disso `active` for informado nessa rota, ele deverá ser ignorado, pois a rota que deverá fazer essa atualização, é a de patch.
 
 - [] Deve ser possível remover um curso pelo `id`.
 
