@@ -23,14 +23,6 @@ Nesse desafio será desenvolvido uma API fictícia para uma empresa de cursos de
       No `body` da requisição, deve receber somente o `name` e/ou `category` para serem atualizados.
       Se for enviado somente o `name`, significa que o `category` não pode ser atualizado e vice-versa. Além disso `active` for informado nessa rota, ele deverá ser ignorado, pois a rota que deverá fazer essa atualização, é a de patch.
 
-- [] Deve ser possível remover um curso pelo `id`.
+- [x] Deve ser possível remover um curso pelo `id`.
 
 - [] Essa rota servirá para marcar se o curso está ativo ou não, ou seja, um toggle entre true or false.
-
-#### Extra
-
-- [] Validar se as propriedades name e category das rotas POST e PUT estão presentes no body da requisição.
-
-- [] Para a parte de definição se o curso está ativo ou não, você pode definir um ENUM(enumerador) para fazer esse ‘’check’’.
-
-- [] Para tratar as exceções, você pode se desafiar e criar as excpetion 😃

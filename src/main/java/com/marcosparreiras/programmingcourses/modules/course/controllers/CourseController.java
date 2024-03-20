@@ -9,11 +9,13 @@ import com.marcosparreiras.programmingcourses.modules.course.dtos.DeleteCourseRe
 import com.marcosparreiras.programmingcourses.modules.course.dtos.FetchCoursesRequestDTO;
 import com.marcosparreiras.programmingcourses.modules.course.dtos.FetchCoursesResponseDTO;
 import com.marcosparreiras.programmingcourses.modules.course.dtos.GetCourseRequestDTO;
+import com.marcosparreiras.programmingcourses.modules.course.dtos.ToggleCourseIsActiveRequest;
 import com.marcosparreiras.programmingcourses.modules.course.dtos.UpdateCourseRequestDTO;
 import com.marcosparreiras.programmingcourses.modules.course.useCases.CreateCourseUseCase;
 import com.marcosparreiras.programmingcourses.modules.course.useCases.DeleteCourseUseCase;
 import com.marcosparreiras.programmingcourses.modules.course.useCases.FetchCoursesUseCase;
 import com.marcosparreiras.programmingcourses.modules.course.useCases.GetCourseUseCase;
+import com.marcosparreiras.programmingcourses.modules.course.useCases.ToggleCourseIsActiveUseCase;
 import com.marcosparreiras.programmingcourses.modules.course.useCases.UpdateCourseUseCase;
 import jakarta.validation.Valid;
 import java.util.Map;
@@ -22,6 +24,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -48,6 +51,9 @@ public class CourseController {
 
   @Autowired
   private DeleteCourseUseCase deleteCourseUseCase;
+
+  @Autowired
+  private ToggleCourseIsActiveUseCase toggleCourseIsActiveUseCase;
 
   @PostMapping("")
   public ResponseEntity<Object> create(
@@ -122,6 +128,22 @@ public class CourseController {
         .id(courseId)
         .build();
       this.deleteCourseUseCase.execute(deleteCourseRequestDTO);
+      return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+    } catch (CourseNotFoundError error) {
+      return ResponseEntity
+        .badRequest()
+        .body(new ErrorMessageDTO(error.getMessage(), null));
+    }
+  }
+
+  @PatchMapping("/toggle-active/{courseId}")
+  public ResponseEntity<Object> toggleIsActive(@PathVariable String courseId) {
+    try {
+      var toggleCourseIsActiveRequest = ToggleCourseIsActiveRequest
+        .builder()
+        .id(courseId)
+        .build();
+      this.toggleCourseIsActiveUseCase.execute(toggleCourseIsActiveRequest);
       return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     } catch (CourseNotFoundError error) {
       return ResponseEntity
