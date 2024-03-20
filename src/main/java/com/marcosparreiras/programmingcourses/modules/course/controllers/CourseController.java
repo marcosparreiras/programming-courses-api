@@ -5,11 +5,13 @@ import com.marcosparreiras.programmingcourses.exceptions.CourseNotFoundError;
 import com.marcosparreiras.programmingcourses.exceptions.dtos.ErrorMessageDTO;
 import com.marcosparreiras.programmingcourses.modules.course.dtos.CreateCourseRequestDTO;
 import com.marcosparreiras.programmingcourses.modules.course.dtos.CreateCourseResponseDTO;
+import com.marcosparreiras.programmingcourses.modules.course.dtos.DeleteCourseRequestDTO;
 import com.marcosparreiras.programmingcourses.modules.course.dtos.FetchCoursesRequestDTO;
 import com.marcosparreiras.programmingcourses.modules.course.dtos.FetchCoursesResponseDTO;
 import com.marcosparreiras.programmingcourses.modules.course.dtos.GetCourseRequestDTO;
 import com.marcosparreiras.programmingcourses.modules.course.dtos.UpdateCourseRequestDTO;
 import com.marcosparreiras.programmingcourses.modules.course.useCases.CreateCourseUseCase;
+import com.marcosparreiras.programmingcourses.modules.course.useCases.DeleteCourseUseCase;
 import com.marcosparreiras.programmingcourses.modules.course.useCases.FetchCoursesUseCase;
 import com.marcosparreiras.programmingcourses.modules.course.useCases.GetCourseUseCase;
 import com.marcosparreiras.programmingcourses.modules.course.useCases.UpdateCourseUseCase;
@@ -18,6 +20,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,6 +45,9 @@ public class CourseController {
 
   @Autowired
   private UpdateCourseUseCase updateCourseUseCase;
+
+  @Autowired
+  private DeleteCourseUseCase deleteCourseUseCase;
 
   @PostMapping("")
   public ResponseEntity<Object> create(
@@ -102,6 +108,22 @@ public class CourseController {
 
       return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     } catch (Exception error) {
+      return ResponseEntity
+        .badRequest()
+        .body(new ErrorMessageDTO(error.getMessage(), null));
+    }
+  }
+
+  @DeleteMapping("/{courseId}")
+  public ResponseEntity<Object> delete(@PathVariable String courseId) {
+    try {
+      var deleteCourseRequestDTO = DeleteCourseRequestDTO
+        .builder()
+        .id(courseId)
+        .build();
+      this.deleteCourseUseCase.execute(deleteCourseRequestDTO);
+      return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+    } catch (CourseNotFoundError error) {
       return ResponseEntity
         .badRequest()
         .body(new ErrorMessageDTO(error.getMessage(), null));
