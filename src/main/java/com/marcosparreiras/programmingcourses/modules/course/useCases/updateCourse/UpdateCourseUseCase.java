@@ -1,10 +1,10 @@
-package com.marcosparreiras.programmingcourses.modules.course.useCases;
+package com.marcosparreiras.programmingcourses.modules.course.useCases.updateCourse;
 
 import com.marcosparreiras.programmingcourses.exceptions.CourseAlreadyExistsError;
 import com.marcosparreiras.programmingcourses.exceptions.CourseNotFoundError;
-import com.marcosparreiras.programmingcourses.modules.course.dtos.UpdateCourseRequestDTO;
-import com.marcosparreiras.programmingcourses.modules.course.entities.Course;
 import com.marcosparreiras.programmingcourses.modules.course.repositoires.CourseRepository;
+import com.marcosparreiras.programmingcourses.modules.course.useCases.updateCourse.dtos.UpdateCourseRequestDTO;
+import com.marcosparreiras.programmingcourses.modules.course.useCases.updateCourse.dtos.UpdateCourseResponseDTO;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +15,9 @@ public class UpdateCourseUseCase {
   @Autowired
   private CourseRepository courseRepository;
 
-  public Course execute(UpdateCourseRequestDTO updateCourseRequestDTO)
-    throws CourseNotFoundError, CourseAlreadyExistsError {
+  public UpdateCourseResponseDTO execute(
+    UpdateCourseRequestDTO updateCourseRequestDTO
+  ) throws CourseNotFoundError, CourseAlreadyExistsError {
     var course =
       this.courseRepository.findById(
           UUID.fromString(updateCourseRequestDTO.id())
@@ -43,6 +44,6 @@ public class UpdateCourseUseCase {
 
     this.courseRepository.save(course);
 
-    return course;
+    return new UpdateCourseResponseDTO(course);
   }
 }

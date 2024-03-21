@@ -1,4 +1,4 @@
-package com.marcosparreiras.programmingcourses.modules.course.dtos;
+package com.marcosparreiras.programmingcourses.modules.course.useCases.updateCourse.dtos;
 
 import lombok.Builder;
 
