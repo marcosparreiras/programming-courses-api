@@ -1,4 +1,4 @@
-package com.marcosparreiras.programmingcourses.modules.course.dtos;
+package com.marcosparreiras.programmingcourses.modules.course.useCases.FetchCourses.dtos;
 
 import com.marcosparreiras.programmingcourses.modules.course.entities.Course;
 import java.util.List;
