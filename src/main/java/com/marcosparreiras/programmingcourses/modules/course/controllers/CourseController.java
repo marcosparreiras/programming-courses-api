@@ -1,23 +1,18 @@
 package com.marcosparreiras.programmingcourses.modules.course.controllers;
 
-import com.marcosparreiras.programmingcourses.exceptions.CourseAlreadyExistsError;
 import com.marcosparreiras.programmingcourses.exceptions.CourseNotFoundError;
 import com.marcosparreiras.programmingcourses.exceptions.dtos.ErrorMessageDTO;
-import com.marcosparreiras.programmingcourses.modules.course.dtos.CreateCourseRequestDTO;
-import com.marcosparreiras.programmingcourses.modules.course.dtos.CreateCourseResponseDTO;
 import com.marcosparreiras.programmingcourses.modules.course.dtos.DeleteCourseRequestDTO;
 import com.marcosparreiras.programmingcourses.modules.course.dtos.FetchCoursesRequestDTO;
 import com.marcosparreiras.programmingcourses.modules.course.dtos.FetchCoursesResponseDTO;
 import com.marcosparreiras.programmingcourses.modules.course.dtos.GetCourseRequestDTO;
 import com.marcosparreiras.programmingcourses.modules.course.dtos.ToggleCourseIsActiveRequest;
 import com.marcosparreiras.programmingcourses.modules.course.dtos.UpdateCourseRequestDTO;
-import com.marcosparreiras.programmingcourses.modules.course.useCases.CreateCourseUseCase;
 import com.marcosparreiras.programmingcourses.modules.course.useCases.DeleteCourseUseCase;
 import com.marcosparreiras.programmingcourses.modules.course.useCases.FetchCoursesUseCase;
 import com.marcosparreiras.programmingcourses.modules.course.useCases.GetCourseUseCase;
 import com.marcosparreiras.programmingcourses.modules.course.useCases.ToggleCourseIsActiveUseCase;
 import com.marcosparreiras.programmingcourses.modules.course.useCases.UpdateCourseUseCase;
-import jakarta.validation.Valid;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,7 +21,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,9 +30,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/courses")
 public class CourseController {
-
-  @Autowired
-  private CreateCourseUseCase createCourseUseCase;
 
   @Autowired
   private FetchCoursesUseCase fetchCoursesUseCase;
@@ -54,22 +45,6 @@ public class CourseController {
 
   @Autowired
   private ToggleCourseIsActiveUseCase toggleCourseIsActiveUseCase;
-
-  @PostMapping("")
-  public ResponseEntity<Object> create(
-    @Valid @RequestBody CreateCourseRequestDTO createCourseRequestDTO
-  ) {
-    try {
-      var course = this.createCourseUseCase.execute(createCourseRequestDTO);
-      return ResponseEntity
-        .status(HttpStatus.CREATED)
-        .body(new CreateCourseResponseDTO(course.getId().toString()));
-    } catch (CourseAlreadyExistsError error) {
-      return ResponseEntity
-        .badRequest()
-        .body(new ErrorMessageDTO(error.getMessage(), "name"));
-    }
-  }
 
   @GetMapping("")
   public ResponseEntity<Object> index(@RequestParam Map<String, String> query) {

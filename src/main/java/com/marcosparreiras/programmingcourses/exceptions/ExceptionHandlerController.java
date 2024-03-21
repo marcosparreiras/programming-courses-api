@@ -7,6 +7,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -45,10 +46,17 @@ public class ExceptionHandlerController {
     return new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
   }
 
-  @ExceptionHandler(Exception.class)
-  public ResponseEntity<ErrorMessageDTO> handleMethodArgumentNotValidException(
-    Exception error
+  @ExceptionHandler(HttpMessageNotReadableException.class)
+  public ResponseEntity<ErrorMessageDTO> handleHttpMessageNotReadableException(
+    HttpMessageNotReadableException error
   ) {
+    String message = "The request body is incomplete";
+    var errorMessage = new ErrorMessageDTO(message, null);
+    return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
+  }
+
+  @ExceptionHandler(Exception.class)
+  public ResponseEntity<ErrorMessageDTO> handleException(Exception error) {
     var errorMessage = new ErrorMessageDTO(error.getMessage(), null);
     return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
   }

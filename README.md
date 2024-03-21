@@ -25,4 +25,4 @@ Nesse desafio será desenvolvido uma API fictícia para uma empresa de cursos de
 
 - [x] Deve ser possível remover um curso pelo `id`.
 
-- [] Essa rota servirá para marcar se o curso está ativo ou não, ou seja, um toggle entre true or false.
+- [x] Essa rota servirá para marcar se o curso está ativo ou não, ou seja, um toggle entre true or false.
