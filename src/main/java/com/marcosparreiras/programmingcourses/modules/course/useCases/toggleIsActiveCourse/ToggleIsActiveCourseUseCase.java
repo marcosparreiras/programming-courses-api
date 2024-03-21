@@ -1,6 +1,6 @@
 package com.marcosparreiras.programmingcourses.modules.course.useCases.toggleIsActiveCourse;
 
-import com.marcosparreiras.programmingcourses.exceptions.CourseNotFoundError;
+import com.marcosparreiras.programmingcourses.modules.course.exceptions.CourseNotFoundError;
 import com.marcosparreiras.programmingcourses.modules.course.repositoires.CourseRepository;
 import com.marcosparreiras.programmingcourses.modules.course.useCases.toggleIsActiveCourse.dtos.ToggleIsActiveCourseRequest;
 import com.marcosparreiras.programmingcourses.modules.course.useCases.toggleIsActiveCourse.dtos.ToggleIsActiveCourseResponse;

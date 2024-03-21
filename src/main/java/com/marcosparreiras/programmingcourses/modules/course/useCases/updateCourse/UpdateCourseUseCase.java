@@ -1,7 +1,7 @@
 package com.marcosparreiras.programmingcourses.modules.course.useCases.updateCourse;
 
-import com.marcosparreiras.programmingcourses.exceptions.CourseAlreadyExistsError;
-import com.marcosparreiras.programmingcourses.exceptions.CourseNotFoundError;
+import com.marcosparreiras.programmingcourses.modules.course.exceptions.CourseAlreadyExistsError;
+import com.marcosparreiras.programmingcourses.modules.course.exceptions.CourseNotFoundError;
 import com.marcosparreiras.programmingcourses.modules.course.repositoires.CourseRepository;
 import com.marcosparreiras.programmingcourses.modules.course.useCases.updateCourse.dtos.UpdateCourseRequestDTO;
 import com.marcosparreiras.programmingcourses.modules.course.useCases.updateCourse.dtos.UpdateCourseResponseDTO;

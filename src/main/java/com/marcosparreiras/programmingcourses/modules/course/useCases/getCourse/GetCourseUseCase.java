@@ -1,6 +1,6 @@
 package com.marcosparreiras.programmingcourses.modules.course.useCases.getCourse;
 
-import com.marcosparreiras.programmingcourses.exceptions.CourseNotFoundError;
+import com.marcosparreiras.programmingcourses.modules.course.exceptions.CourseNotFoundError;
 import com.marcosparreiras.programmingcourses.modules.course.repositoires.CourseRepository;
 import com.marcosparreiras.programmingcourses.modules.course.useCases.getCourse.dtos.GetCourseRequestDTO;
 import com.marcosparreiras.programmingcourses.modules.course.useCases.getCourse.dtos.GetCourseResponseDTO;

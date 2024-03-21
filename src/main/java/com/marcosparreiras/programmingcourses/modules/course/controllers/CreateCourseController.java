@@ -1,7 +1,7 @@
 package com.marcosparreiras.programmingcourses.modules.course.controllers;
 
-import com.marcosparreiras.programmingcourses.exceptions.CourseAlreadyExistsError;
-import com.marcosparreiras.programmingcourses.exceptions.dtos.ErrorMessageDTO;
+import com.marcosparreiras.programmingcourses.exceptions.AppRuntimeError;
+import com.marcosparreiras.programmingcourses.modules.course.controllers.dtos.ResponseBadRequest;
 import com.marcosparreiras.programmingcourses.modules.course.useCases.createCourse.CreateCourseUseCase;
 import com.marcosparreiras.programmingcourses.modules.course.useCases.createCourse.dtos.CreateCourseRequestDTO;
 import jakarta.validation.Valid;
@@ -53,10 +53,10 @@ public class CreateCourseController {
       );
 
       return ResponseEntity.status(HttpStatus.CREATED).body(presenter);
-    } catch (CourseAlreadyExistsError error) {
+    } catch (AppRuntimeError error) {
       return ResponseEntity
         .badRequest()
-        .body(new ErrorMessageDTO(error.getMessage(), "name"));
+        .body(new ResponseBadRequest(error.getMessage()));
     }
   }
 }

@@ -1,7 +1,7 @@
 package com.marcosparreiras.programmingcourses.modules.course.useCases.createCourse;
 
-import com.marcosparreiras.programmingcourses.exceptions.CourseAlreadyExistsError;
 import com.marcosparreiras.programmingcourses.modules.course.entities.Course;
+import com.marcosparreiras.programmingcourses.modules.course.exceptions.CourseAlreadyExistsError;
 import com.marcosparreiras.programmingcourses.modules.course.repositoires.CourseRepository;
 import com.marcosparreiras.programmingcourses.modules.course.useCases.createCourse.dtos.CreateCourseRequestDTO;
 import com.marcosparreiras.programmingcourses.modules.course.useCases.createCourse.dtos.CreateCourseResponseDTO;

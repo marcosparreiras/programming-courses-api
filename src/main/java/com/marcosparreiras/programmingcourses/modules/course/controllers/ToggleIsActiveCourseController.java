@@ -1,7 +1,7 @@
 package com.marcosparreiras.programmingcourses.modules.course.controllers;
 
-import com.marcosparreiras.programmingcourses.exceptions.CourseNotFoundError;
-import com.marcosparreiras.programmingcourses.exceptions.dtos.ErrorMessageDTO;
+import com.marcosparreiras.programmingcourses.exceptions.AppRuntimeError;
+import com.marcosparreiras.programmingcourses.modules.course.controllers.dtos.ResponseBadRequest;
 import com.marcosparreiras.programmingcourses.modules.course.useCases.toggleIsActiveCourse.ToggleIsActiveCourseUseCase;
 import com.marcosparreiras.programmingcourses.modules.course.useCases.toggleIsActiveCourse.dtos.ToggleIsActiveCourseRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +28,10 @@ public class ToggleIsActiveCourseController {
         .build();
       this.toggleIsActiveCourseUseCase.execute(toggleIsActiveCourseRequest);
       return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
-    } catch (CourseNotFoundError error) {
+    } catch (AppRuntimeError error) {
       return ResponseEntity
         .badRequest()
-        .body(new ErrorMessageDTO(error.getMessage(), null));
+        .body(new ResponseBadRequest(error.getMessage()));
     }
   }
 }

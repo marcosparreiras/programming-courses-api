@@ -1,7 +1,7 @@
 package com.marcosparreiras.programmingcourses.modules.course.controllers;
 
-import com.marcosparreiras.programmingcourses.exceptions.CourseNotFoundError;
-import com.marcosparreiras.programmingcourses.exceptions.dtos.ErrorMessageDTO;
+import com.marcosparreiras.programmingcourses.exceptions.AppRuntimeError;
+import com.marcosparreiras.programmingcourses.modules.course.controllers.dtos.ResponseBadRequest;
 import com.marcosparreiras.programmingcourses.modules.course.entities.Course;
 import com.marcosparreiras.programmingcourses.modules.course.useCases.getCourse.GetCourseUseCase;
 import com.marcosparreiras.programmingcourses.modules.course.useCases.getCourse.dtos.GetCourseRequestDTO;
@@ -33,10 +33,10 @@ public class GetCourseController {
 
       var presenter = new ResPresenter(getCourseResponseDTO.course());
       return ResponseEntity.ok().body(presenter);
-    } catch (CourseNotFoundError error) {
+    } catch (AppRuntimeError error) {
       return ResponseEntity
         .badRequest()
-        .body(new ErrorMessageDTO(error.getMessage(), null));
+        .body(new ResponseBadRequest(error.getMessage()));
     }
   }
 }

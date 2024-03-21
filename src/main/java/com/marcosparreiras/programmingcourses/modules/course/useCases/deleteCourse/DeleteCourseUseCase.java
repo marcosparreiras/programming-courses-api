@@ -1,6 +1,6 @@
 package com.marcosparreiras.programmingcourses.modules.course.useCases.deleteCourse;
 
-import com.marcosparreiras.programmingcourses.exceptions.CourseNotFoundError;
+import com.marcosparreiras.programmingcourses.modules.course.exceptions.CourseNotFoundError;
 import com.marcosparreiras.programmingcourses.modules.course.repositoires.CourseRepository;
 import com.marcosparreiras.programmingcourses.modules.course.useCases.deleteCourse.dtos.DeleteCourseRequestDTO;
 import java.util.UUID;
