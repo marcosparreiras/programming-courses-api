@@ -1,4 +1,4 @@
-# Desafio
+# Desafio - API de Cursos
 
 Nesse desafio será desenvolvido uma API fictícia para uma empresa de cursos de programação, onde em um primeiro momento, você deverá utilizar o CRUD, para criação de cursos.
 
