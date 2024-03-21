@@ -1,21 +1,21 @@
-package com.marcosparreiras.programmingcourses.modules.course.useCases;
+package com.marcosparreiras.programmingcourses.modules.course.useCases.toggleIsActiveCourse;
 
 import com.marcosparreiras.programmingcourses.exceptions.CourseNotFoundError;
-import com.marcosparreiras.programmingcourses.modules.course.dtos.ToggleCourseIsActiveRequest;
-import com.marcosparreiras.programmingcourses.modules.course.entities.Course;
 import com.marcosparreiras.programmingcourses.modules.course.repositoires.CourseRepository;
+import com.marcosparreiras.programmingcourses.modules.course.useCases.toggleIsActiveCourse.dtos.ToggleIsActiveCourseRequest;
+import com.marcosparreiras.programmingcourses.modules.course.useCases.toggleIsActiveCourse.dtos.ToggleIsActiveCourseResponse;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ToggleCourseIsActiveUseCase {
+public class ToggleIsActiveCourseUseCase {
 
   @Autowired
   private CourseRepository courseRepository;
 
-  public Course execute(
-    ToggleCourseIsActiveRequest toggleCourseIsActiveRequest
+  public ToggleIsActiveCourseResponse execute(
+    ToggleIsActiveCourseRequest toggleCourseIsActiveRequest
   ) throws CourseNotFoundError {
     var course =
       this.courseRepository.findById(
@@ -28,6 +28,6 @@ public class ToggleCourseIsActiveUseCase {
     course.setActive(!course.isActive());
     this.courseRepository.save(course);
 
-    return course;
+    return new ToggleIsActiveCourseResponse(course);
   }
 }

@@ -1,8 +1,8 @@
-package com.marcosparreiras.programmingcourses.modules.course.useCases;
+package com.marcosparreiras.programmingcourses.modules.course.useCases.deleteCourse;
 
 import com.marcosparreiras.programmingcourses.exceptions.CourseNotFoundError;
-import com.marcosparreiras.programmingcourses.modules.course.dtos.DeleteCourseRequestDTO;
 import com.marcosparreiras.programmingcourses.modules.course.repositoires.CourseRepository;
+import com.marcosparreiras.programmingcourses.modules.course.useCases.deleteCourse.dtos.DeleteCourseRequestDTO;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
